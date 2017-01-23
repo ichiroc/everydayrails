@@ -7,6 +7,10 @@ RSpec.describe Contact do
     expect(build :contact).to be_valid
   end
 
+  it 'ファクトリで作成したcontactは電話番号を3つ持つ' do
+    expect(create(:contact).phones.count).to eq 3 # MEMO: build だと関連先が保存されないので createする
+  end
+
   it '姓と名とメール有れば有効な状態であること' do
     contact = build(:contact,
                     firstname: 'Aaron',
