@@ -42,7 +42,7 @@ RSpec.describe Contact do
 
   it '連絡先のフルネームを文字列として返すこと' do
     contact = build :contact
-    expect(contact.name).to eq 'John Doe'
+    expect(contact.name).to eq "#{contact.firstname} #{contact.lastname}"
   end
 
   describe '文字で姓をフィルタする' do
