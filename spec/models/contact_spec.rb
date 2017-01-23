@@ -48,19 +48,19 @@ RSpec.describe Contact do
   describe '文字で姓をフィルタする' do
     # DRY にするのは良いことだが、ファイル内でスクロールを何度もするぐらいなら重複しましょう（本書より）
     before :each do # each は毎回実施する指示。省略しても良い
-      @smith = Contact.create(
+      @smith = create(:contact,
         firstname: 'John',
         lastname: 'Smith',
         email: 'jsmith@example.com'
       )
 
-      @jones = Contact.create(
+      @jones = create(:contact,
         firstname: 'Tim',
         lastname: 'Jones',
         email: 'tjones@example.com'
       )
 
-      @johnson = Contact.create(
+      @johnson = create(:contact,
         firstname: 'John',
         lastname: 'Johnson',
         email: 'jjohnson@example.com'
