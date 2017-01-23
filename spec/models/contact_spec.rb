@@ -15,7 +15,11 @@ RSpec.describe Contact do
     contact.valid?
     expect(contact.errors[:firstname]).to include("can't be blank")
   end
-  it '姓がなければ無効な状態であること'
+  it '姓がなければ無効な状態であること' do
+    contact = Contact.new(lastname: nil)
+    contact.valid?
+    expect(contact.errors[:lastname]).to include("can't be blank")
+  end
   it 'メールアドレスがなければ無効な状態であること'
   it '重複したメールアドレスなら無効な状態であること'
   it '連絡先のフルネームを文字列として返すこと'
