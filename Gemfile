@@ -40,3 +40,15 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap-sass', '~> 3.1.1'
 
+group :developmen, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
