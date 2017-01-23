@@ -41,47 +41,40 @@ RSpec.describe Contact do
     expect(contact.name).to eq 'John Doe'
   end
 
-  it 'マッチした結果をソート済みの配列として返すこと' do
-    smith = Contact.create(
-      firstname: 'John',
-      lastname: 'Smith',
-      email: 'jsmith@example.com'
-    )
+  describe '文字で姓をフィルタする' do
+    # DRY にするのは良いことだが、ファイル内でスクロールを何度もするぐらいなら重複しましょう（本書より）
+    before :each do # each は毎回実施する指示。省略しても良い
+      @smith = Contact.create(
+        firstname: 'John',
+        lastname: 'Smith',
+        email: 'jsmith@example.com'
+      )
 
-    jones = Contact.create(
-      firstname: 'Tim',
-      lastname: 'Jones',
-      email: 'tjones@example.com'
-    )
+      @jones = Contact.create(
+        firstname: 'Tim',
+        lastname: 'Jones',
+        email: 'tjones@example.com'
+      )
 
-    johnson = Contact.create(
-      firstname: 'John',
-      lastname: 'Johnson',
-      email: 'jjohnson@example.com'
-    )
-    # ↓順番もテストしている
-    expect(Contact.by_letter('J')).to eq [johnson, jones]
-  end
+      @johnson = Contact.create(
+        firstname: 'John',
+        lastname: 'Johnson',
+        email: 'jjohnson@example.com'
+      )
+    end
 
-  it 'マッチしなかったものは結果に含まれないこと' do
-    smith = Contact.create(
-      firstname: 'John',
-      lastname: 'Smith',
-      email: 'jsmith@example.com'
-    )
+    context 'マッチする文字の場合' do
+      it 'マッチした結果をソート済みの配列として返すこと' do
+        # ↓順番もテストしている
+        expect(Contact.by_letter('J')).to eq [@johnson, @jones]
+      end
+    end
 
-    jones = Contact.create(
-      firstname: 'Tim',
-      lastname: 'Jones',
-      email: 'tjones@example.com'
-    )
-
-    johnson = Contact.create(
-      firstname: 'John',
-      lastname: 'Johnson',
-      email: 'jjohnson@example.com'
-    )
-    # ↓順番もテストしている
-    expect(Contact.by_letter('J')).not_to include smith
+    context 'マッチしない文字の場合' do
+      it 'マッチしなかったものは結果に含まれないこと' do
+        # ↓順番もテストしている
+        expect(Contact.by_letter('J')).not_to include @smith
+      end
+    end
   end
 end
