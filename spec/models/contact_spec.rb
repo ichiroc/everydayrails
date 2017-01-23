@@ -40,4 +40,27 @@ RSpec.describe Contact do
                           email: 'johndone@example.com')
     expect(contact.name).to eq 'John Doe'
   end
+
+  it 'マッチした結果をソート済みの配列として返すこと' do
+    smith = Contact.create(
+      firstname: 'John',
+      lastname: 'Smith',
+      email: 'jsmith@example.com'
+    )
+
+    jones = Contact.create(
+      firstname: 'Tim',
+      lastname: 'Jones',
+      email: 'tjones@example.com'
+    )
+
+    johnson = Contact.create(
+      firstname: 'John',
+      lastname: 'Johnson',
+      email: 'jjohnson@example.com'
+    )
+    # ↓順番もテストしている
+    expect(Contact.by_letter('J')).to eq [johnson, jones]
+  end
+
 end
