@@ -20,7 +20,20 @@ RSpec.describe Contact do
     contact.valid?
     expect(contact.errors[:lastname]).to include("can't be blank")
   end
-  it 'メールアドレスがなければ無効な状態であること'
-  it '重複したメールアドレスなら無効な状態であること'
+
+  it 'メールアドレスがなければ無効な状態であること' do
+    contact = Contact.new(email: nil)
+    contact.valid?
+    expect(contact.errors[:email]).to include("can't be blank")
+  end
+
+  it '重複したメールアドレスなら無効な状態であること' do
+    Contact.create(firstname: 'Joe', lastname: 'Tester',
+                   email: 'tester@example.com')
+    contact = Contact.new(firstname: 'Jane', lastname: 'Tester',
+                          email: 'tester@example.com')
+    contact.valid?
+    expect(contact.errors[:email]).to include('has already been taken')
+  end
   it '連絡先のフルネームを文字列として返すこと'
 end
