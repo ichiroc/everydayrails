@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7', platform: :ruby
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -39,6 +39,8 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass', '~> 3.1.1'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 group :developmen, :test do
   gem 'rspec-rails'
