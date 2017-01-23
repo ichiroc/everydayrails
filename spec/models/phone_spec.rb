@@ -16,6 +16,7 @@ RSpec.describe Phone do
     mobile_phone.valid?
     expect(mobile_phone.errors[:phone]).to include('has already been taken')
   end
+
   it '2件の連絡先で同じ電話番号を共有できること' do
     contact = Contact.create(firstname: 'Joe', lastname: 'Tester',
                              email: 'tester@example.com')

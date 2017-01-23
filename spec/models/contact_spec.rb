@@ -35,5 +35,9 @@ RSpec.describe Contact do
     contact.valid?
     expect(contact.errors[:email]).to include('has already been taken')
   end
-  it '連絡先のフルネームを文字列として返すこと'
+  it '連絡先のフルネームを文字列として返すこと' do
+    contact = Contact.new(firstname: 'John', lastname: 'Doe',
+                          email: 'johndone@example.com')
+    expect(contact.name).to eq 'John Doe'
+  end
 end
