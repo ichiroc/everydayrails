@@ -49,13 +49,13 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'pry-byebug'
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'faker'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'launchy'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
 end
