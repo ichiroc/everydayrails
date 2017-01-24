@@ -42,7 +42,13 @@ gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
-group :developmen, :test do
+group :development do
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'method_source'
+end
+
+group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
