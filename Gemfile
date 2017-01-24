@@ -53,6 +53,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'faker'
   gem 'database_cleaner'
   gem 'launchy'
