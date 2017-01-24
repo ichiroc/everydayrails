@@ -1,3 +1,4 @@
+# coding: utf-8
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
@@ -59,7 +60,9 @@ guard :rspec, cmd: "bundle exec rspec --color --format documentation" do
   watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
   # Capybara features specs
+  # layout/application.html.erb を編集すると layout_spec.rb が反応する・・
   watch(rails.view_dirs)     { |m| rspec.spec.call("features/#{m[1]}") }
+  # app/layouts という存在しないディレクトリを監視している・・・
   watch(rails.layouts)       { |m| rspec.spec.call("features/#{m[1]}") }
 
   # Turnip features and steps
@@ -67,4 +70,7 @@ guard :rspec, cmd: "bundle exec rspec --color --format documentation" do
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
+
+  # 全てを監視して全てのテストを実行する場合
+  # watch(/app\/.*/){ 'spec' }
 end
