@@ -1,3 +1,4 @@
+# coding: utf-8
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -60,16 +61,21 @@ RSpec.configure do |config|
   config.include LoginMacros
 
   config.before(:suite) do
+    # テストデータセットアップの戦略設定
+    # テスト全体は transaction を使用する
     DatabaseCleaner.strategy = :transaction
+    # 削除は truncation を使う
     DatabaseCleaner.clean_with :truncation
   end
 
+  # トランザクションの開始と終了を実行するタイミング
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
     end
   end
 
+  # 全件削除するタイミング
   config.after(:each) do
     DatabaseCleaner.clean
   end

@@ -6,7 +6,7 @@ require 'rails_helper'
 # 抑止するにはapplication.rb のジェネレータの設定で request_specs: false を指定する
 # MEMO: before と等価の background が使える
 # MEMO: let と等価の given が使える
-feature 'ユーザー管理' do # MEMO: feature は describe と同等
+feature 'ユーザー管理', js: true do # MEMO: feature は describe と同等
   scenario '新しいユーザーを追加する' do # MEMO: it と同等
     admin = create :admin
     sign_in admin
