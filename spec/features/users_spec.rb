@@ -2,6 +2,10 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
+# MEMO: scaffold するとスペックも作られる
+# 抑止するにはapplication.rb のジェネレータの設定で request_specs: false を指定する
+# MEMO: before と等価の background が使える
+# MEMO: let と等価の given が使える
 feature 'ユーザー管理' do # MEMO: feature は describe と同等
   scenario '新しいユーザーを追加する' do # MEMO: it と同等
     admin = create :admin
@@ -25,6 +29,10 @@ feature 'ユーザー管理' do # MEMO: feature は describe と同等
                                              with: 'secret123'
       click_button 'Create User'
     }.to change(User, :count).by(1)
+
+    # MEMO: フィーチャースペックをデバッグしたい場合は gem 'launchy' の save_and_open_page を使う。
+    # その時点のHTMLを保存して開いてくれる
+    # save_and_open_page
 
     expect(current_path).to eq users_path
     expect(page).to have_content 'New user created'
