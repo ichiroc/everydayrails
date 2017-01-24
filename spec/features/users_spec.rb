@@ -9,12 +9,7 @@ require 'rails_helper'
 feature 'ユーザー管理' do # MEMO: feature は describe と同等
   scenario '新しいユーザーを追加する' do # MEMO: it と同等
     admin = create :admin
-    visit root_path
-    click_link 'Log In'
-    fill_in 'Email', with: admin.email
-    fill_in 'Password', with: admin.password
-    click_button 'Log In'
-    visit root_path
+    sign_in admin
 
     # MEMO: expect{ hoge }.to change(receiver, message).by(count)
     # 処理hoge を行うことによって receiver.message の値が count 変わる
@@ -30,7 +25,9 @@ feature 'ユーザー管理' do # MEMO: feature は describe と同等
       click_button 'Create User'
     }.to change(User, :count).by(1)
 
-    # MEMO: フィーチャースペックをデバッグしたい場合は gem 'launchy' の save_and_open_page を使う。
+    # MEMO: フィーチャースペックをデバッグしたい場合は普通のデバッグ手法が使える
+    # binding.pry
+    # gem 'launchy' の save_and_open_page を使えば
     # その時点のHTMLを保存して開いてくれる
     # save_and_open_page
 
